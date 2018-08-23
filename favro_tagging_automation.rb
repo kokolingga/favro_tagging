@@ -4,6 +4,7 @@ require 'open3'
 require 'json'
 require_relative('class/organization')
 require_relative('class/tag')
+require_relative('class/card')
 
 # good example
 # https://www.thoughtco.com/optionparser-parsing-command-line-options-2907753
@@ -57,9 +58,11 @@ optparse.parse!
 so_widget = Organization.new(options)
 
 # Get Tags
-array_of_raw_tags = so_widget.get_array_of_raw_json("https://favro.com/api/v1/tags")
-so_tags = Tag.new(array_of_raw_tags)
-so_tags.show_clean_tags
+# array_of_raw_tags = so_widget.get_array_of_raw_json("https://favro.com/api/v1/tags")
+# so_tags = Tag.new(array_of_raw_tags)
+# so_tags.show_clean_tags
 
-# Get Cards
-array_of_raw_cards = so_widget.get_array_of_raw_json("https://favro.com/api/v1/cards?widgetCommonId=#{widgetCommonId}")
+# # Get Cards
+array_of_raw_cards = so_widget.get_array_of_raw_json("https://favro.com/api/v1/cards?widgetCommonId=#{options[:widget_id]}")
+so_cards = Card.new(array_of_raw_cards)
+so_cards.show_clean_cards
