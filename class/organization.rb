@@ -6,6 +6,11 @@ class Organization
     @widgetCommonId = options[:widget_id]
     @username = options[:username]
     @token = options[:token]
+
+    # puts "@organizationId : #{@organizationId}"
+    # puts "@widgetCommonId : #{@widgetCommonId}"
+    # puts "@username : #{@username}"
+    # puts "@token : #{@token}"
   end
 
   def get_array_of_raw_json(api)
@@ -23,7 +28,12 @@ class Organization
     if total_page > 1
       # next api execution (get remaining pages)
       while next_page < total_page do
-        cmd = "curl -X GET \"#{api}?page=#{next_page}\" -H \"organizationId: #{organizationId}\" -u \"#{username}\":\"#{token}\""
+        if api.include? "?"
+          cmd = "curl -X GET \"#{api}&page=#{next_page}\" -H \"organizationId: #{organizationId}\" -u \"#{username}\":\"#{token}\""
+        else
+          cmd = "curl -X GET \"#{api}?page=#{next_page}\" -H \"organizationId: #{organizationId}\" -u \"#{username}\":\"#{token}\""
+        end
+
         Open3.popen3(cmd) { |stdin, stdout, stderr, wait_thr| raw_json_temp = stdout.read }
         raw_json_arr << JSON.parse(raw_json_temp)
 
