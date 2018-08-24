@@ -94,15 +94,15 @@ class Card
           # remove duplicate
           # puts suitable_tags.uniq
 
-          focused_tags.each do |focused_tag|
-            if card[:tags].include? focused_tag
-              puts "----- #{translate_focused_tag(focused_tag)} sudah ada!"
+          suitable_tags.each do |suitable_tag|
+            if card[:tags].include? suitable_tag
+              puts "----- #{translate_focused_tag(suitable_tag)} sudah ada!"
             else
-              puts "#{translate_focused_tag(focused_tag)} akan ditambahkan ......."
+              puts "#{translate_focused_tag(suitable_tag)} akan ditambahkan ......."
             end
           end
           puts "\n\n"
-          
+
           counter+=1
         end
 
