@@ -65,4 +65,4 @@ so_widget = Organization.new(options)
 # # Get Cards
 array_of_raw_cards = so_widget.get_array_of_raw_json("https://favro.com/api/v1/cards?widgetCommonId=#{options[:widget_id]}")
 so_cards = Card.new(array_of_raw_cards)
-so_cards.show_clean_cards
+so_cards.tag_checking
