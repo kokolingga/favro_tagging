@@ -2,8 +2,8 @@
 require 'optparse'
 require 'open3'
 require 'json'
-require_relative('class/organization')
-require_relative('class/tag')
+require_relative('class/widget')
+# require_relative('class/tag')
 require_relative('class/card')
 
 # good example
@@ -53,16 +53,7 @@ end
 
 optparse.parse!
 
-#so : system ops
 
-so_widget = Organization.new(options)
-
-# Get Tags
-# array_of_raw_tags = so_widget.get_array_of_raw_json("https://favro.com/api/v1/tags")
-# so_tags = Tag.new(array_of_raw_tags)
-# so_tags.show_clean_tags
-
-# # Get Cards
-array_of_raw_cards = so_widget.get_array_of_raw_json("https://favro.com/api/v1/cards?widgetCommonId=#{options[:widget_id]}")
-so_cards = Card.new(array_of_raw_cards)
-so_cards.tag_checking
+so_cards = Card.new(options)
+so_cards.tag_checking_and_applying
+puts "okay"
